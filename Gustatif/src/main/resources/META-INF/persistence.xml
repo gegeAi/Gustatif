@@ -5,6 +5,8 @@
     <class>com.b3130.gustatif.metier.modele.Client</class>
     <class>com.b3130.gustatif.metier.modele.Produit</class>
     <class>com.b3130.gustatif.metier.modele.Restaurant</class>
+    <class>com.b3130.gustatif.metier.modele.Livreur</class>
+    <class>com.b3130.gustatif.metier.modele.Livraison</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:derby://localhost:1527/GustatifB3130"/>
       <property name="javax.persistence.jdbc.password" value="douduo!5702"/>

@@ -60,8 +60,7 @@ public class JpaUtil {
 //        System.err.println(message);
 //        pause(5);
     }
-
-
+    
     /**
      * Créée l'instance courante de Entity Manager (liée à ce Thread).
      * <br/><strong>À utiliser uniquement au niveau Service.</strong>
