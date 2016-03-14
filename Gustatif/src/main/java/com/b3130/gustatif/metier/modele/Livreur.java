@@ -5,6 +5,7 @@
  */
 package com.b3130.gustatif.metier.modele;
 
+import com.b3130.gustatif.util.GeoTest;
 import com.google.maps.model.LatLng;
 import java.io.Serializable;
 import javax.persistence.Entity;
@@ -27,6 +28,7 @@ public class Livreur implements Serializable {
     private Double latitude;
     private Double capacite;
     private Double vitesseMoyenne;
+    private boolean disponible;
 
     public Livreur() {
     }
@@ -35,6 +37,10 @@ public class Livreur implements Serializable {
         this.nom = nom;
         this.adresse = adresse;
         this.capacite = capacite;
+        LatLng latlng = GeoTest.getLatLng(adresse);
+        latitude = latlng.lat;
+        longitude = latlng.lng;
+        disponible = true;
     }
     
     public Livreur(String nom, String adresse, Double capacite, Double vitesseMoyenne) {
@@ -56,6 +62,9 @@ public class Livreur implements Serializable {
 
     public void setAdresse(String adresse) {
         this.adresse = adresse;
+        LatLng latlng = GeoTest.getLatLng(adresse);
+        latitude = latlng.lat;
+        longitude = latlng.lng;
     }
 
     public Double getCapacite() {
@@ -81,12 +90,20 @@ public class Livreur implements Serializable {
     public Double getLatitude() {
         return latitude;
     }
-    
-    public void setCoordonnees(LatLng latLng) {
-        this.longitude = latLng.lng;
-        this.latitude = latLng.lat;
+
+    public boolean isDisponible() {
+        return disponible;
     }
 
+    public void setDisponible(boolean disponible) {
+        this.disponible = disponible;
+    }
+
+    public Long getId() {
+        return id;
+    }
+       
+       
     @Override
     public String toString() {
         return "Livreur{" + "id=" + id + ", nom=" + nom + ", adresse=" + adresse + ", longitude=" + longitude + ", latitude=" + latitude + ", capacite=" + capacite + ", vitesseMoyenne=" + vitesseMoyenne + '}';

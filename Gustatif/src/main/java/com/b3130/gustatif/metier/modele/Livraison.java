@@ -126,6 +126,26 @@ public class Livraison implements Serializable {
     {
         commande.remove(p);
     }
+    
+    public float getTotalPoids()
+    {
+        float renvoi = 0;
+        for (Produit commande1 : commande)
+        {
+            renvoi += commande1.getPoids();
+        }
+        return renvoi;
+    }
+    
+    public float getTotalPrix()
+    {
+        float renvoi = 0;
+        for (Produit commande1 : commande)
+        {
+            renvoi += commande1.getPrix();
+        }
+        return renvoi;
+    }
 
     @Override
     public String toString() {

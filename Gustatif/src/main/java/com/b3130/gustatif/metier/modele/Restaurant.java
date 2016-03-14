@@ -1,5 +1,7 @@
 package com.b3130.gustatif.metier.modele;
 
+import com.b3130.gustatif.metier.service.ServicesTechniques;
+import com.b3130.gustatif.util.GeoTest;
 import com.google.maps.model.LatLng;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -32,6 +34,9 @@ public class Restaurant implements Serializable {
         this.denomination = denomination;
         this.description = description;
         this.adresse = adresse;
+        LatLng latlng = GeoTest.getLatLng(adresse);
+        latitude = latlng.lat;
+        longitude = latlng.lng;
         produits = new ArrayList<>();
     }
 
@@ -73,13 +78,11 @@ public class Restaurant implements Serializable {
 
     public void setAdresse(String adresse) {
         this.adresse = adresse;
+        LatLng latlng = GeoTest.getLatLng(adresse);
+        latitude = latlng.lat;
+        longitude = latlng.lng;
     }
-
-    public void setCoordonnees(LatLng latLng) {
-        this.longitude = latLng.lng;
-        this.latitude = latLng.lat;
-    }
-
+    
     public void addProduit(Produit produit) {
         this.produits.add(produit);
     }
