@@ -70,7 +70,7 @@ public class LivraisonDao {
             Query q = em.createQuery("SELECT l FROM Livraison l WHERE l.id=id");
             livraisons = (Livraison) q.getSingleResult();
             livraisons.addProduit(p);
-            livraison = em.merge(livraison);
+            livraisons = em.merge(livraisons);
         }
         catch(Exception e) {
             throw e;
