@@ -1,5 +1,7 @@
 package com.b3130.gustatif.metier.modele;
 
+import com.b3130.gustatif.metier.service.ServicesTechniques;
+import com.b3130.gustatif.util.GeoTest;
 import com.google.maps.model.LatLng;
 import java.io.Serializable;
 import javax.persistence.Entity;
@@ -28,6 +30,9 @@ public class Client implements Serializable {
         this.prenom = prenom;
         this.mail = mail;
         this.adresse = adresse;
+        LatLng latlng = GeoTest.getLatLng(adresse);
+        latitude = latlng.lat;
+        longitude = latlng.lng;
     }
 
     public Long getId() {
@@ -72,13 +77,11 @@ public class Client implements Serializable {
 
     public void setAdresse(String adresse) {
         this.adresse = adresse;
+        LatLng latlng = GeoTest.getLatLng(adresse);
+        latitude = latlng.lat;
+        longitude = latlng.lng;
     }
-
-    public void setCoordonnees(LatLng latLng) {
-        this.longitude = latLng.lng;
-        this.latitude = latLng.lat;
-    }
-
+  
     @Override
     public String toString() {
         return "Client{" + "id=" + id + ", nom=" + nom + ", prenom=" + prenom + ", mail=" + mail + ", adresse=" + adresse + ", longitude=" + longitude + ", latitude=" + latitude + '}';

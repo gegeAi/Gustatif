@@ -53,7 +53,7 @@ public class LivreurDao {
         EntityManager em = JpaUtil.obtenirEntityManager();
         List<Livreur> livreurs = null;
         try {
-            Query q = em.createQuery("SELECT l FROM Livreur l ORDER BY l.instantPassageCmd");
+            Query q = em.createQuery("SELECT l FROM Livreur l ORDER BY l.nom");
             livreurs = (List<Livreur>) q.getResultList();
         }
         catch(Exception e) {
