@@ -90,6 +90,10 @@ public class Livreur implements Serializable {
     public Double getLatitude() {
         return latitude;
     }
+    
+    public LatLng getLatLng(String adresse) {
+        return new LatLng(latitude, longitude);     
+    }
 
     public boolean isDisponible() {
         return disponible;

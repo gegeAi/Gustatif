@@ -52,12 +52,10 @@ public class Livraison implements Serializable {
     public Livraison() {
     }
 
-    public Livraison(Date dureeEstimee, Date instantPassageCmd, Client client, Restaurant resto, Livreur livreur) {
-        this.dureeEstimee = dureeEstimee;
+    public Livraison(Date instantPassageCmd, Client client, Restaurant resto) {
         this.instantPassageCmd = instantPassageCmd;
         this.client = client;
         this.resto = resto;
-        this.livreur = livreur;
     }
 
 
