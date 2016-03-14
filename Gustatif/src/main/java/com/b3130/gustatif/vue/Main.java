@@ -23,8 +23,8 @@ public class Main {
         ServicesMetier services = new ServicesMetier();
         Client c = new Client("jean", "paul", "12 rue des begonias", "adressemailbidon@");
         ServicesTechniques st = new ServicesTechniques();
-        String s = st.inscription(c);
-        System.out.println(s);
+        boolean s = services.createClient(c);
+        //System.out.println(s);
         int choix = 1;
         
         Scanner lectureClavier = new Scanner(System.in);
@@ -39,6 +39,7 @@ public class Main {
             choix = lectureClavier.nextInt();
             switch(choix){
                 case 1 :
+                    System.out.println("Entrez adresse mail");
                     String mail = lectureClavier.next();
                     services.connexionClient(mail);
                     

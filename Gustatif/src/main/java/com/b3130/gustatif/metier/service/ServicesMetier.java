@@ -7,10 +7,12 @@ package com.b3130.gustatif.metier.service;
 
 import com.b3130.gustatif.dao.ClientDao;
 import com.b3130.gustatif.dao.JpaUtil;
+import com.b3130.gustatif.dao.LivraisonDao;
 import com.b3130.gustatif.dao.LivreurDao;
 import com.b3130.gustatif.dao.ProduitDao;
 import com.b3130.gustatif.dao.RestaurantDao;
 import com.b3130.gustatif.metier.modele.Client;
+import com.b3130.gustatif.metier.modele.Livraison;
 import com.b3130.gustatif.metier.modele.Livreur;
 import com.b3130.gustatif.metier.modele.Produit;
 import com.b3130.gustatif.metier.modele.Restaurant;
@@ -27,6 +29,7 @@ public class ServicesMetier {
     RestaurantDao daoRestaurant = new RestaurantDao();
     ProduitDao daoProduit = new ProduitDao();
     LivreurDao daoLivreur = new LivreurDao();
+    LivraisonDao daoLivraison = new LivraisonDao();
     
     public boolean createClient(Client c)
     {
@@ -147,6 +150,21 @@ public class ServicesMetier {
         return allLivreur;
     }
     
+    public List<Livraison> listAllDelivery()
+    {
+        List<Livraison> allLivraison = new LinkedList<>();
+        JpaUtil.creerEntityManager();
+        JpaUtil.ouvrirTransaction();
+        try {
+            allLivraison = daoLivraison.findAll();
+        } catch (Throwable ex) {
+            JpaUtil.fermerEntityManager();
+        }
+        JpaUtil.validerTransaction();
+        JpaUtil.fermerEntityManager();
+        return allLivraison;
+    }
+    
     public Client connexionClient(String mail)
     {
         Client clientFound = null;
@@ -175,6 +193,21 @@ public class ServicesMetier {
         JpaUtil.validerTransaction();
         JpaUtil.fermerEntityManager();
         return restaurantFound; 
+    }
+    
+    public void addDishToDelivery(Long id,Produit p)
+    {
+
+        JpaUtil.creerEntityManager();
+        JpaUtil.ouvrirTransaction();
+        try {
+            daoLivraison.addDish(id, p);
+        } catch (Throwable ex) {
+            JpaUtil.fermerEntityManager();
+        }
+        JpaUtil.validerTransaction();
+        JpaUtil.fermerEntityManager();
+
     }
     
 }

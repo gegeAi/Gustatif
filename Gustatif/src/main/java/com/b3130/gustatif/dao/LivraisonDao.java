@@ -6,6 +6,7 @@
 package com.b3130.gustatif.dao;
 
 import com.b3130.gustatif.metier.modele.Livraison;
+import com.b3130.gustatif.metier.modele.Produit;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
@@ -60,6 +61,20 @@ public class LivraisonDao {
             throw e;
         }     
         return livraisons;
+    }
+    
+    public void addDish(Long id, Produit p) throws Throwable {
+        EntityManager em = JpaUtil.obtenirEntityManager();
+        Livraison livraisons = null;
+        try {
+            Query q = em.createQuery("SELECT l FROM Livraison l WHERE l.id=id");
+            livraisons = (Livraison) q.getSingleResult();
+            livraisons.addProduit(p);
+            livraison = em.merge(livraison);
+        }
+        catch(Exception e) {
+            throw e;
+        }     
     }
     
 }
