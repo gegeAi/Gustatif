@@ -42,6 +42,20 @@ public class RestaurantDao {
         return restaurant;
     }
     
+    public Restaurant findByName(String name) throws Throwable {
+        
+        EntityManager em = JpaUtil.obtenirEntityManager();
+        Restaurant restaurant = null;
+        try {
+            Query q = em.createQuery("SELECT r FROM Restaurant WHERE r.denomination = name");
+            restaurant = (Restaurant) q.getSingleResult();
+        }
+        catch(Exception e) {
+            throw e;
+        }
+        return restaurant;
+    }
+    
     public List<Restaurant> findAll() throws Throwable {
         EntityManager em = JpaUtil.obtenirEntityManager();
         List<Restaurant> restaurants = null;
