@@ -14,14 +14,6 @@ import com.b3130.gustatif.metier.modele.Livraison;
 import com.b3130.gustatif.metier.modele.Livreur;
 import com.b3130.gustatif.metier.modele.Produit;
 import com.b3130.gustatif.util.GeoTest;
-import com.google.maps.DistanceMatrixApi;
-import com.google.maps.DistanceMatrixApiRequest;
-import com.google.maps.GeoApiContext;
-import com.google.maps.GeocodingApi;
-import com.google.maps.model.AddressComponent;
-import com.google.maps.model.GeocodingResult;
-import com.google.maps.model.LatLng;
-import com.google.maps.model.TravelMode;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -59,10 +51,9 @@ public class ServicesTechniques {
         Livreur renvoi = null;
         Double trajetCourt = -1d;
         try {
-            JpaUtil.creerEntityManager();
-            JpaUtil.ouvrirTransaction();
             
-            List<Livreur> livreurs = dao.findAll(); 
+            
+            List<Livreur> livreurs = new ServicesMetier().listAllDeliveryMan(); 
             
             
             for (Livreur livreur : livreurs) {
@@ -80,13 +71,16 @@ public class ServicesTechniques {
                 }
             }
             
+            JpaUtil.creerEntityManager();
+            JpaUtil.ouvrirTransaction();
+            
             if(renvoi != null)
             {
                 l.setLivreur(renvoi);
+                l.setDureeEstimee(new Date((long)trajetCourt.doubleValue()));
                 renvoi.setDisponible(false);
                 dao.update(renvoi);
-            }
-            
+            }        
             
             JpaUtil.validerTransaction();
             JpaUtil.fermerEntityManager();
@@ -196,7 +190,8 @@ public class ServicesTechniques {
             JpaUtil.creerEntityManager();
             JpaUtil.ouvrirTransaction();
             
-            l.getLivreur().setDisponible(true);
+            if(l.getLivreur() != null)
+                l.getLivreur().setDisponible(true);
             dao.update(l.getLivreur());
             
             JpaUtil.validerTransaction();
@@ -207,5 +202,18 @@ public class ServicesTechniques {
         }
     }
     
+    public List<Livraison> trouveActuellesCommandes()
+    // renvoie une listes des commandes non abouties (en cours)
+    {
+        List<Livraison> livraisonsActuelles = new ServicesMetier().listAllDelivery();
+        for (Livraison livraisonsActuelle : livraisonsActuelles) 
+        {
+            if(livraisonsActuelle.getHeureLivraison() != null)
+            {
+                livraisonsActuelles.remove(livraisonsActuelle);
+            }
+        }
+        return livraisonsActuelles;
+    }
     
 }
