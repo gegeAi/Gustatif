@@ -41,6 +41,20 @@ public class ClientDao {
         return client;
     }
     
+    public Client connectClient (String adMail)
+    {
+        EntityManager em = JpaUtil.obtenirEntityManager();
+        Client connect = null;
+        try {
+            Query q = em.createQuery("SELECT c FROM Client WHERE c.mail = adMail");
+            connect = (Client) q.getSingleResult();
+        }
+        catch(Exception e) {
+            throw e;
+        }     
+        return connect;
+    }
+    
     public List<Client> findAll() throws Throwable {
         EntityManager em = JpaUtil.obtenirEntityManager();
         List<Client> clients = null;
