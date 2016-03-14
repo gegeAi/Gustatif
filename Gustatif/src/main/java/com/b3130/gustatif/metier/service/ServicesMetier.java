@@ -48,6 +48,23 @@ public class ServicesMetier {
         
     }
     
+    public boolean updateClient(Client c)
+    {
+        JpaUtil.creerEntityManager();
+        JpaUtil.ouvrirTransaction();
+        
+        try {
+            daoClient.update(c);
+        } catch (Throwable ex) {
+            JpaUtil.fermerEntityManager();
+            return false;
+        }
+        JpaUtil.validerTransaction();
+        JpaUtil.fermerEntityManager();
+        return true;
+        
+    }
+    
     public void createRestaurant(Restaurant r)
     {
         JpaUtil.creerEntityManager();
@@ -55,6 +72,20 @@ public class ServicesMetier {
         
         try {
             daoRestaurant.create(r);
+        } catch (Throwable ex) {
+            JpaUtil.fermerEntityManager();
+        }
+        JpaUtil.validerTransaction();
+        JpaUtil.fermerEntityManager(); 
+    }
+    
+    public void updateRestaurant(Restaurant r)
+    {
+        JpaUtil.creerEntityManager();
+        JpaUtil.ouvrirTransaction();
+        
+        try {
+            daoRestaurant.update(r);
         } catch (Throwable ex) {
             JpaUtil.fermerEntityManager();
         }
@@ -76,13 +107,41 @@ public class ServicesMetier {
         JpaUtil.fermerEntityManager(); 
     }
     
-    public void createLivreurs(Livreur l)
+    public void updateProducts(Produit p)
     {
         JpaUtil.creerEntityManager();
         JpaUtil.ouvrirTransaction();
         
         try {
-            daoLivreur.create(l);
+            daoProduit.update(p);
+        } catch (Throwable ex) {
+            JpaUtil.fermerEntityManager();
+        }
+        JpaUtil.validerTransaction();
+        JpaUtil.fermerEntityManager(); 
+    }
+    
+    public void createLivraisons(Livraison l)
+    {
+        JpaUtil.creerEntityManager();
+        JpaUtil.ouvrirTransaction();
+        
+        try {
+            daoLivraison.create(l);
+        } catch (Throwable ex) {
+            JpaUtil.fermerEntityManager();
+        }
+        JpaUtil.validerTransaction();
+        JpaUtil.fermerEntityManager(); 
+    }
+    
+    public void updateLivraisons(Livraison l)
+    {
+        JpaUtil.creerEntityManager();
+        JpaUtil.ouvrirTransaction();
+        
+        try {
+            daoLivraison.update(l);
         } catch (Throwable ex) {
             JpaUtil.fermerEntityManager();
         }
