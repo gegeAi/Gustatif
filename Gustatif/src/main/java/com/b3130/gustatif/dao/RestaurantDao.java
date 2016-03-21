@@ -43,11 +43,11 @@ public class RestaurantDao {
     }
     
     public Restaurant findByName(String name) throws Throwable {
-        
         EntityManager em = JpaUtil.obtenirEntityManager();
         Restaurant restaurant = null;
         try {
-            Query q = em.createQuery("SELECT r FROM Restaurant WHERE r.denomination = name");
+            Query q = em.createQuery("SELECT r FROM Restaurant r WHERE r.denomination = :name");
+            q.setParameter("name", name);
             restaurant = (Restaurant) q.getSingleResult();
         }
         catch(Exception e) {
@@ -66,7 +66,6 @@ public class RestaurantDao {
         catch(Exception e) {
             throw e;
         }
-        
         return restaurants;
     }
 }

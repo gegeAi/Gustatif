@@ -7,6 +7,7 @@ package com.b3130.gustatif.metier.modele;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -38,7 +39,7 @@ public class Livraison implements Serializable {
     private Date instantPassageCmd;
     
     @ManyToMany
-    List<Produit> commande;
+    List<Produit> commande = new LinkedList<>();
 
     @ManyToOne
     Client client;
@@ -145,9 +146,13 @@ public class Livraison implements Serializable {
         return renvoi;
     }
 
+    public void setCommande(List<Produit> commande) {
+        this.commande = commande;
+    }
+
     @Override
     public String toString() {
-        return "Livraison{" + "id=" + id + ", heureLivraison=" + heureLivraison + ", dureeEstimee=" + dureeEstimee + ", instantPassageCmd=" + instantPassageCmd + ", commande=" + commande + ", client=" + client + ", resto=" + resto + '}';
-    }
+        return "Livraison{" + "id=" + id + ", heureLivraison=" + heureLivraison + ", dureeEstimee=" + dureeEstimee + ", instantPassageCmd=" + instantPassageCmd + ", commande=" + commande + ", client=" + client + ", resto=" + resto + ", livreur=" + livreur + '}';
+    } 
         
 }

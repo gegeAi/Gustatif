@@ -56,6 +56,8 @@ public class LivraisonDao {
         try {
             Query q = em.createQuery("SELECT l FROM Livraison l ORDER BY l.instantPassageCmd");
             livraisons = (List<Livraison>) q.getResultList();
+            
+            
         }
         catch(Exception e) {
             throw e;
@@ -67,14 +69,16 @@ public class LivraisonDao {
         EntityManager em = JpaUtil.obtenirEntityManager();
         Livraison livraisons = null;
         try {
-            Query q = em.createQuery("SELECT l FROM Livraison l WHERE l.id=id");
+            Query q = em.createQuery("SELECT l FROM Livraison l WHERE l.id=:id");
+            q.setParameter("id", id);
             livraisons = (Livraison) q.getSingleResult();
             livraisons.addProduit(p);
-            livraisons = em.merge(livraisons);
+            em.merge(livraisons);
         }
         catch(Exception e) {
             throw e;
-        }     
+        }  
+        
     }
     
 }

@@ -52,7 +52,6 @@ public class ProduitDao {
         catch(Exception e) {
             throw e;
         }
-        
         return produits;
     }
 }

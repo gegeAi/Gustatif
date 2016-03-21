@@ -7,17 +7,15 @@ package com.b3130.gustatif.metier.service;
 
 import com.b3130.gustatif.dao.ClientDao;
 import com.b3130.gustatif.dao.JpaUtil;
-import com.b3130.gustatif.dao.LivraisonDao;
-import com.b3130.gustatif.dao.LivreurDao;
-import com.b3130.gustatif.dao.ProduitDao;
-import com.b3130.gustatif.dao.RestaurantDao;
 import com.b3130.gustatif.metier.modele.Client;
 import com.b3130.gustatif.metier.modele.Livraison;
 import com.b3130.gustatif.metier.modele.Livreur;
 import com.b3130.gustatif.metier.modele.Produit;
-import com.b3130.gustatif.metier.modele.Restaurant;
-import java.util.LinkedList;
+import com.b3130.gustatif.util.GeoTest;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 
 /**
  *
@@ -25,203 +23,18 @@ import java.util.List;
  */
 public class ServicesMetier {
     
-    ClientDao daoClient = new ClientDao();
-    RestaurantDao daoRestaurant = new RestaurantDao();
-    ProduitDao daoProduit = new ProduitDao();
-    LivreurDao daoLivreur = new LivreurDao();
-    LivraisonDao daoLivraison = new LivraisonDao();
+    ServicesTechniques st = new ServicesTechniques();
     
-    public boolean createClient(Client c)
+    public String inscription(Client c)
     {
-        JpaUtil.creerEntityManager();
-        JpaUtil.ouvrirTransaction();
-        
-        try {
-            daoClient.create(c);
-        } catch (Throwable ex) {
-            JpaUtil.fermerEntityManager();
-            return false;
+        if(!st.createClient(c))
+        {
+        return "Bonjour " + c.getPrenom() + ",\nVotre inscription au service GUSTAT’IF a malencontreusement échoué... Merci de recommencer ultérieurement.";
         }
-        JpaUtil.validerTransaction();
-        JpaUtil.fermerEntityManager();
-        return true;
-        
-    }
-    
-    public boolean updateClient(Client c)
-    {
-        JpaUtil.creerEntityManager();
-        JpaUtil.ouvrirTransaction();
-        
-        try {
-            daoClient.update(c);
-        } catch (Throwable ex) {
-            JpaUtil.fermerEntityManager();
-            return false;
+        else
+        {
+        return "Bonjour " + c.getPrenom() + ",\nNous vous confirmons votre inscription au service GUSTAT’IF. Votre numéro de client est : " + c.getId() + ".";
         }
-        JpaUtil.validerTransaction();
-        JpaUtil.fermerEntityManager();
-        return true;
-        
-    }
-    
-    public void createRestaurant(Restaurant r)
-    {
-        JpaUtil.creerEntityManager();
-        JpaUtil.ouvrirTransaction();
-        
-        try {
-            daoRestaurant.create(r);
-        } catch (Throwable ex) {
-            JpaUtil.fermerEntityManager();
-        }
-        JpaUtil.validerTransaction();
-        JpaUtil.fermerEntityManager(); 
-    }
-    
-    public void updateRestaurant(Restaurant r)
-    {
-        JpaUtil.creerEntityManager();
-        JpaUtil.ouvrirTransaction();
-        
-        try {
-            daoRestaurant.update(r);
-        } catch (Throwable ex) {
-            JpaUtil.fermerEntityManager();
-        }
-        JpaUtil.validerTransaction();
-        JpaUtil.fermerEntityManager(); 
-    }
-    
-    public void createProducts(Produit p)
-    {
-        JpaUtil.creerEntityManager();
-        JpaUtil.ouvrirTransaction();
-        
-        try {
-            daoProduit.create(p);
-        } catch (Throwable ex) {
-            JpaUtil.fermerEntityManager();
-        }
-        JpaUtil.validerTransaction();
-        JpaUtil.fermerEntityManager(); 
-    }
-    
-    public void updateProducts(Produit p)
-    {
-        JpaUtil.creerEntityManager();
-        JpaUtil.ouvrirTransaction();
-        
-        try {
-            daoProduit.update(p);
-        } catch (Throwable ex) {
-            JpaUtil.fermerEntityManager();
-        }
-        JpaUtil.validerTransaction();
-        JpaUtil.fermerEntityManager(); 
-    }
-    
-    public void createLivraisons(Livraison l)
-    {
-        JpaUtil.creerEntityManager();
-        JpaUtil.ouvrirTransaction();
-        
-        try {
-            daoLivraison.create(l);
-        } catch (Throwable ex) {
-            JpaUtil.fermerEntityManager();
-        }
-        JpaUtil.validerTransaction();
-        JpaUtil.fermerEntityManager(); 
-    }
-    
-    public void updateLivraisons(Livraison l)
-    {
-        JpaUtil.creerEntityManager();
-        JpaUtil.ouvrirTransaction();
-        
-        try {
-            daoLivraison.update(l);
-        } catch (Throwable ex) {
-            JpaUtil.fermerEntityManager();
-        }
-        JpaUtil.validerTransaction();
-        JpaUtil.fermerEntityManager(); 
-    }
-    
-    public List<Client> listAllClients()
-    {
-        List<Client> allClient = new LinkedList<>();
-        JpaUtil.creerEntityManager();
-        JpaUtil.ouvrirTransaction();
-        try {
-            allClient = daoClient.findAll();
-        } catch (Throwable ex) {
-            JpaUtil.fermerEntityManager();
-        }
-        JpaUtil.validerTransaction();
-        JpaUtil.fermerEntityManager(); 
-        return allClient;
-    }
-    
-    public List<Restaurant> listAllRestaurants()
-    {
-        List<Restaurant> allRest = new LinkedList<>();
-        JpaUtil.creerEntityManager();
-        JpaUtil.ouvrirTransaction();
-        try {
-            allRest = daoRestaurant.findAll();
-        } catch (Throwable ex) {
-            JpaUtil.fermerEntityManager();
-        }
-        JpaUtil.validerTransaction();
-        JpaUtil.fermerEntityManager(); 
-        return allRest;
-    }
-    
-    public List<Produit> listAllProducts()
-    {
-        List<Produit> allProducts = new LinkedList<>();
-        JpaUtil.creerEntityManager();
-        JpaUtil.ouvrirTransaction();
-        try {
-            allProducts = daoProduit.findAll();
-        } catch (Throwable ex) {
-            JpaUtil.fermerEntityManager();
-        }
-        JpaUtil.validerTransaction();
-        JpaUtil.fermerEntityManager();
-        return allProducts;
-    }
-    
-    public List<Livreur> listAllDeliveryMan()
-    {
-        List<Livreur> allLivreur = new LinkedList<>();
-        JpaUtil.creerEntityManager();
-        JpaUtil.ouvrirTransaction();
-        try {
-            allLivreur = daoLivreur.findAll();
-        } catch (Throwable ex) {
-            JpaUtil.fermerEntityManager();
-        }
-        JpaUtil.validerTransaction();
-        JpaUtil.fermerEntityManager();
-        return allLivreur;
-    }
-    
-    public List<Livraison> listAllDelivery()
-    {
-        List<Livraison> allLivraison = new LinkedList<>();
-        JpaUtil.creerEntityManager();
-        JpaUtil.ouvrirTransaction();
-        try {
-            allLivraison = daoLivraison.findAll();
-        } catch (Throwable ex) {
-            JpaUtil.fermerEntityManager();
-        }
-        JpaUtil.validerTransaction();
-        JpaUtil.fermerEntityManager();
-        return allLivraison;
     }
     
     public Client connexionClient(String mail)
@@ -230,7 +43,7 @@ public class ServicesMetier {
         JpaUtil.creerEntityManager();
         JpaUtil.ouvrirTransaction();
         try {
-            clientFound = daoClient.connectClient(mail);
+            clientFound = new ClientDao().connectClient(mail);
         } catch (Throwable ex) {
             JpaUtil.fermerEntityManager();
         }
@@ -238,35 +51,142 @@ public class ServicesMetier {
         JpaUtil.fermerEntityManager();
         return clientFound;  
     }
-    
-    public Restaurant findRestaurantByName(String name)
+          
+    public boolean affecteLivreur(Livraison l)
+    // Choisi un livreur pour une livraison, et bloque son etat comme indisponible 
+    // jusqu'à livraison de la commande ou annulation de celle-ci
     {
-        Restaurant restaurantFound = null;
-        JpaUtil.creerEntityManager();
-        JpaUtil.ouvrirTransaction();
-        try {
-            restaurantFound = daoRestaurant.findByName(name);
-        } catch (Throwable ex) {
-            JpaUtil.fermerEntityManager();
+        Livreur renvoi = null;
+        Double trajetCourt = -1d;
+        
+        List<Livreur> livreurs = new ServicesTechniques().listAllDeliveryMan(); 
+
+        for (Livreur livreur : livreurs) {
+
+            if (livreur.isDisponible() && l.getTotalPoids() < livreur.getCapacite()) {
+                Double candidat;
+                if(livreur.getVitesseMoyenne() == null)
+                    candidat = GeoTest.getTripDurationByBicycleInMinute(GeoTest.getLatLng(livreur.getAdresse()), GeoTest.getLatLng(l.getResto().getAdresse()));
+                else
+                    candidat = GeoTest.getFlightDistanceInKm(GeoTest.getLatLng(livreur.getAdresse()), GeoTest.getLatLng(l.getResto().getAdresse())) / livreur.getVitesseMoyenne();
+                if (trajetCourt > candidat || trajetCourt == -1d) {    
+                    renvoi = livreur;
+                    trajetCourt=candidat;
+                } 
+            }
         }
-        JpaUtil.validerTransaction();
-        JpaUtil.fermerEntityManager();
-        return restaurantFound; 
+
+        if(renvoi != null)
+        {
+            l.setLivreur(renvoi);
+            l.setDureeEstimee(new Date((long)trajetCourt.doubleValue()*60000));
+            renvoi.setDisponible(false);
+            st.updateLivreur(renvoi);
+        }        
+        
+        return renvoi != null;
     }
     
-    public void addDishToDelivery(Long id,Produit p)
+    public void validerLivraison(Livraison l)
+    // Termine une livraison, replace le livreur en etat libre et met a jour
+   // son adresse actuelle avec la derniere adresse connue (celle du client)
     {
+        l.setHeureLivraison(new Date());
+        st.updateLivraisons(l);
+        l.getLivreur().setDisponible(true);
+        l.getLivreur().setAdresse(l.getClient().getAdresse());
+        st.updateLivreur(l.getLivreur());
 
-        JpaUtil.creerEntityManager();
-        JpaUtil.ouvrirTransaction();
-        try {
-            daoLivraison.addDish(id, p);
-        } catch (Throwable ex) {
-            JpaUtil.fermerEntityManager();
+        
+    }
+    
+    public String mailLivreur(Livraison l)
+    // Valide la commande et renvoie le contenu d'un mail a envoyer au livreur
+    {
+        String renvoi = "Bonjour " + l.getLivreur().getNom() + ",\nMerci d'effectuer cette livraison dès maintenant, tout en respectant le code de la route;-)\n\t Le Chef";
+        renvoi += "\n\nDétails de la Livraison \n\tDate/heure : ";
+        renvoi += l.getInstantPassageCmd().toString();
+        renvoi += "\n\tLivreur : ";
+        renvoi += l.getLivreur().getNom();
+        renvoi += "(n°";
+        renvoi += l.getLivreur().getId();
+        renvoi += ")\n\tRestaurant : ";
+        renvoi += l.getResto().getDenomination();
+        renvoi += "\n\t Client :\n\t\t";
+        renvoi += l.getClient().getPrenom() + " "+ l.getClient().getNom();
+        renvoi += "\n\t\t" + l.getClient().getAdresse();
+        renvoi += "\n\t\t" + l.getClient().getMail();
+        renvoi +="\n\nCommande : \n";
+        List<Produit> plats = l.getFullCommande();
+        HashMap<Produit, Integer> reduction;
+        reduction = new HashMap<>();
+        for (Produit plat : plats) {
+            if(reduction.containsKey(plat))
+            {
+                reduction.put(plat, reduction.get(plat)+1);
+                plats.remove(plat);
+            }
+            else
+            {
+                reduction.put(plat, 1);
+            }
         }
-        JpaUtil.validerTransaction();
-        JpaUtil.fermerEntityManager();
-
+        
+        for(Produit plat : plats)
+        {
+            renvoi += reduction.get(plat);
+            renvoi += plat.getDenomination();
+            renvoi += ": ";
+            renvoi += reduction.get(plat);
+            renvoi += " X ";
+            renvoi += plat.getPrix();
+            renvoi += " euros\n";
+        }
+        
+        renvoi += "\nTOTAL : " + l.getTotalPrix() + " euros";
+        
+       st.createLivraisons(l);
+   
+       return renvoi;
+    }
+    
+    public void annuleCommande(Livraison l)
+    // annule une commande non terminee et libere le livreur
+    {
+        l.getLivreur().setDisponible(true);
+        st.updateLivreur(l.getLivreur());   
+    }
+    
+    public List<Livraison> trouveActuellesCommandes()
+    // renvoie une listes des commandes non abouties (en cours)
+    {
+        List<Livraison> livraisonsActuelles = st.listAllDelivery();
+        for (Livraison livraisonsActuelle : livraisonsActuelles) 
+        {
+            if(livraisonsActuelle.getHeureLivraison() != null)
+            {
+                livraisonsActuelles.remove(livraisonsActuelle);
+            }
+        }
+        return livraisonsActuelles;
+    }
+    
+    public void addDish(Livraison l, Produit p)
+    {
+        boolean existe = false;
+        for (Produit produit : l.getResto().getProduits()) {
+        
+            if(existe = Objects.equals(p.getId(), produit.getId()))
+            {
+                break;
+            }
+        }
+        
+        if(existe)
+        {
+            l.addProduit(p);
+        }
+            
     }
     
 }
