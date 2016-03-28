@@ -213,13 +213,13 @@ public class ServicesTechniques {
         return allRest;
     }
     
-    public List<Produit> listAllProducts()
+    public List<Produit> listAllProducts(Long restId)
     {
         List<Produit> allProducts = new LinkedList<>();
         JpaUtil.creerEntityManager();
         JpaUtil.ouvrirTransaction();
         try {
-            allProducts = daoProduit.findAll();
+            allProducts = daoProduit.findAll(restId);
         } catch (Throwable ex) {
             JpaUtil.fermerEntityManager();
         }
