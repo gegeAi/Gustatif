@@ -60,6 +60,7 @@ public class Main {
                     {
                         System.out.println("Erreur création du client\n");
                     }
+                    break;
                     
                 case 2:
                     Client connecte = serviceM.connexionClient(requete("Entrez votre adresse mail"));
@@ -72,14 +73,15 @@ public class Main {
                         System.out.println(""+connecte.getMail()+" est connecte\n");
                         
                     }
-                    
+                    break;
                     
                 case 3:
-                    
+                    break;
                     
                     
                 case 4:
                     run = false;
+                    break;
             }
         }
                 
@@ -108,7 +110,7 @@ public class Main {
             r.setDenomination(restos[i]);
             r.setDescription("On mange bien");
             List<Produit> prod = new LinkedList<Produit>();
-            prod = serviceT.listAllProducts();
+            prod = serviceT.listAllProducts(r.getId());
             for(int j=0; j<prod.size() ; j++)
             {
                r.addProduit(prod.get(j)); 

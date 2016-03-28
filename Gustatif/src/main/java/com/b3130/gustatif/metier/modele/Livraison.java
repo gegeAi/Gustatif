@@ -5,6 +5,7 @@
  */
 package com.b3130.gustatif.metier.modele;
 
+import static com.b3130.gustatif.vue.Main.sc;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.LinkedList;
@@ -57,6 +58,8 @@ public class Livraison implements Serializable {
         this.instantPassageCmd = instantPassageCmd;
         this.client = client;
         this.resto = resto;
+        System.out.println("appuyez sur une touche pour continuer");
+        sc.nextLine();
     }
 
 

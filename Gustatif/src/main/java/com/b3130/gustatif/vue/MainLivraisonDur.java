@@ -28,11 +28,13 @@ public class MainLivraisonDur {
         String mail = sm.mailLivreur(l);
         st.createLivraisons(l);
         System.out.println(mail);
+        
+        /*
         System.out.println("\n\n*******VALIDATION********\n\n");
         Livraison aValider;
         System.out.println(sm.trouveActuellesCommandes().get(0));
         sm.validerLivraison(aValider = sm.trouveActuellesCommandes().get(0));
-        System.out.println(aValider);
+        System.out.println(aValider);*/
         
     }
 }
