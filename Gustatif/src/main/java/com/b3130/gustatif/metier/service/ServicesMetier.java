@@ -14,6 +14,7 @@ import com.b3130.gustatif.metier.modele.Produit;
 import com.b3130.gustatif.util.GeoTest;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
 
@@ -26,6 +27,8 @@ public class ServicesMetier {
     ServicesTechniques st = new ServicesTechniques();
     
     public String inscription(Client c)
+    // inscrit un client dans la base
+    // et renvoie le mail de succes / echec
     {
         if(!st.createClient(c))
         {
@@ -38,6 +41,8 @@ public class ServicesMetier {
     }
     
     public Client connexionClient(String mail)
+    // connecte un client selon son adresse mail
+    // renvoie le client si trouvé, null sinon
     {
         Client clientFound = null;
         JpaUtil.creerEntityManager();
@@ -161,17 +166,20 @@ public class ServicesMetier {
     // renvoie une listes des commandes non abouties (en cours)
     {
         List<Livraison> livraisonsActuelles = st.listAllDelivery();
+        List<Livraison> renvoi = new LinkedList<>();
         for (Livraison livraisonsActuelle : livraisonsActuelles) 
         {
-            if(livraisonsActuelle.getHeureLivraison() != null)
+            if(livraisonsActuelle.getHeureLivraison() == null)
             {
-                livraisonsActuelles.remove(livraisonsActuelle);
+                renvoi.add(livraisonsActuelle);
             }
         }
-        return livraisonsActuelles;
+        return renvoi;
     }
     
     public void addDish(Livraison l, Produit p)
+    // ajoute un plat a une livraison en attente de validation
+    // en verifiant la disponibilite par rapport au restaurant choisi
     {
         boolean existe = false;
         for (Produit produit : l.getResto().getProduits()) {
@@ -181,7 +189,6 @@ public class ServicesMetier {
                 break;
             }
         }
-        
         if(existe)
         {
             l.addProduit(p);

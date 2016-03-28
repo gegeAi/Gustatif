@@ -1,6 +1,5 @@
 package com.b3130.gustatif.metier.modele;
 
-import com.b3130.gustatif.metier.service.ServicesTechniques;
 import com.b3130.gustatif.util.GeoTest;
 import com.google.maps.model.LatLng;
 import java.io.Serializable;
