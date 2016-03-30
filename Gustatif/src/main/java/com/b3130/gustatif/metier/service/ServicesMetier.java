@@ -11,6 +11,7 @@ import com.b3130.gustatif.metier.modele.Client;
 import com.b3130.gustatif.metier.modele.Livraison;
 import com.b3130.gustatif.metier.modele.Livreur;
 import com.b3130.gustatif.metier.modele.Produit;
+import com.b3130.gustatif.metier.modele.Restaurant;
 import com.b3130.gustatif.util.GeoTest;
 import java.util.Date;
 import java.util.HashMap;
@@ -51,12 +52,37 @@ public class ServicesMetier {
             clientFound = new ClientDao().connectClient(mail);
         } catch (Throwable ex) {
             JpaUtil.fermerEntityManager();
+            return clientFound;  
         }
         JpaUtil.validerTransaction();
         JpaUtil.fermerEntityManager();
         return clientFound;  
     }
-          
+    
+    public boolean creerCommande(Client c, List<Produit> p, List<Integer> qte, Restaurant r)
+    {
+        try {
+            Livraison l = new Livraison(new Date(), c, r);
+            for(int i = 0 ; i< p.size(); i++)
+            {
+                for(int j = 0; j < qte.get(i); j ++)
+                {
+                    addDish(l, p.get(i));
+                }
+            }
+            affecteLivreur(l);
+            String mail = mailLivreur(l);
+            st.createLivraisons(l);
+            System.out.println(mail);
+        } catch (Throwable ex) {
+            System.out.println(ex);
+  
+            return false;
+        }
+        
+        return true;
+    }
+    
     public boolean affecteLivreur(Livraison l)
     // Choisi un livreur pour une livraison, et bloque son etat comme indisponible 
     // jusqu'à livraison de la commande ou annulation de celle-ci
@@ -67,20 +93,23 @@ public class ServicesMetier {
         List<Livreur> livreurs = new ServicesTechniques().listAllDeliveryMan(); 
 
         for (Livreur livreur : livreurs) {
-
+            
             if (livreur.isDisponible() && l.getTotalPoids() < livreur.getCapacite()) {
                 Double candidat;
                 if(livreur.getVitesseMoyenne() == null)
                     candidat = GeoTest.getTripDurationByBicycleInMinute(GeoTest.getLatLng(livreur.getAdresse()), GeoTest.getLatLng(l.getResto().getAdresse()));
                 else
                     candidat = GeoTest.getFlightDistanceInKm(GeoTest.getLatLng(livreur.getAdresse()), GeoTest.getLatLng(l.getResto().getAdresse())) / livreur.getVitesseMoyenne();
-                if (trajetCourt > candidat || trajetCourt == -1d) {    
+                
+                System.out.println("Trajet court : " + trajetCourt + " candidat : " + candidat);
+                if (trajetCourt > candidat || trajetCourt == -1d) { 
+                    System.out.println("Trajet court : " + trajetCourt + " candidat : " + candidat);
                     renvoi = livreur;
                     trajetCourt=candidat;
                 } 
             }
         }
-
+            
         if(renvoi != null)
         {
             l.setLivreur(renvoi);
@@ -108,6 +137,7 @@ public class ServicesMetier {
     public String mailLivreur(Livraison l)
     // Valide la commande et renvoie le contenu d'un mail a envoyer au livreur
     {
+        System.out.println(l);
         String renvoi = "Bonjour " + l.getLivreur().getNom() + ",\nMerci d'effectuer cette livraison dès maintenant, tout en respectant le code de la route;-)\n\t Le Chef";
         renvoi += "\n\nDétails de la Livraison \n\tDate/heure : ";
         renvoi += l.getInstantPassageCmd().toString();
@@ -150,7 +180,6 @@ public class ServicesMetier {
         
         renvoi += "\nTOTAL : " + l.getTotalPrix() + " euros";
         
-       st.createLivraisons(l);
    
        return renvoi;
     }

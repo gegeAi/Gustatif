@@ -106,11 +106,12 @@ public class Livreur implements Serializable {
     public Long getId() {
         return id;
     }
-       
-       
+
     @Override
     public String toString() {
-        return "Livreur{" + "id=" + id + ", nom=" + nom + ", adresse=" + adresse + ", longitude=" + longitude + ", latitude=" + latitude + ", capacite=" + capacite + ", vitesseMoyenne=" + vitesseMoyenne + '}';
+        return "Livreur{" + "id=" + id + ", nom=" + nom + ", adresse=" + adresse + ", longitude=" + longitude + ", latitude=" + latitude + ", capacite=" + capacite + ", vitesseMoyenne=" + vitesseMoyenne + ", disponible=" + disponible + '}';
     }
-
+       
+       
+ 
 }

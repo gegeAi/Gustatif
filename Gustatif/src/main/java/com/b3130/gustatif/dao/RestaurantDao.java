@@ -1,6 +1,7 @@
 package com.b3130.gustatif.dao;
 
 
+import com.b3130.gustatif.metier.modele.Produit;
 import com.b3130.gustatif.metier.modele.Restaurant;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -68,4 +69,6 @@ public class RestaurantDao {
         }
         return restaurants;
     }
+    
+
 }

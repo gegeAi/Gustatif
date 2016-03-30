@@ -18,6 +18,7 @@ import com.b3130.gustatif.metier.modele.Produit;
 import com.b3130.gustatif.metier.modele.Restaurant;
 import java.util.LinkedList;
 import java.util.List;
+import static util.Saisie.lireChaine;
 
 /**
  *
@@ -165,6 +166,9 @@ public class ServicesTechniques {
         } catch (Throwable ex) {
             JpaUtil.fermerEntityManager();
         }
+        
+        lireChaine("appuyez sur une touche pour continuer");
+        
         JpaUtil.validerTransaction();
         JpaUtil.fermerEntityManager(); 
     }
@@ -219,7 +223,7 @@ public class ServicesTechniques {
         JpaUtil.creerEntityManager();
         JpaUtil.ouvrirTransaction();
         try {
-            allProducts = daoProduit.findAll(restId);
+            allProducts = daoProduit.findAll();
         } catch (Throwable ex) {
             JpaUtil.fermerEntityManager();
         }
@@ -257,7 +261,7 @@ public class ServicesTechniques {
         JpaUtil.fermerEntityManager();
         return allLivraison;
     }
-    
+        
     public Restaurant findRestaurantByName(String name)
     {
         Restaurant restaurantFound = null;
@@ -271,6 +275,21 @@ public class ServicesTechniques {
         JpaUtil.validerTransaction();
         JpaUtil.fermerEntityManager();
         return restaurantFound; 
+    }
+    
+    public List<Produit> listAllProductsForARestaurant(Long restId)
+    {
+        List<Produit> allProducts = new LinkedList<>();
+        JpaUtil.creerEntityManager();
+        JpaUtil.ouvrirTransaction();
+        try {
+            allProducts = daoRestaurant.findById(restId).getProduits();
+        } catch (Throwable ex) {
+            JpaUtil.fermerEntityManager();
+        }
+        JpaUtil.validerTransaction();
+        JpaUtil.fermerEntityManager();
+        return allProducts;
     }
             
 }

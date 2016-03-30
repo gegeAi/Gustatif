@@ -58,8 +58,6 @@ public class Livraison implements Serializable {
         this.instantPassageCmd = instantPassageCmd;
         this.client = client;
         this.resto = resto;
-        System.out.println("appuyez sur une touche pour continuer");
-        sc.nextLine();
     }
 
 

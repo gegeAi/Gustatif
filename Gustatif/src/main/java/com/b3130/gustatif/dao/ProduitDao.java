@@ -42,7 +42,7 @@ public class ProduitDao {
         return produit;
     }
     
-    public List<Produit> findAll(Long restId) throws Throwable {
+    public List<Produit> findAll() throws Throwable {
         EntityManager em = JpaUtil.obtenirEntityManager();
         List<Produit> produits = null;
         try {
@@ -54,4 +54,6 @@ public class ProduitDao {
         }
         return produits;
     }
+    
+    
 }

@@ -31,7 +31,7 @@ public class Main {
     public static Scanner sc = new Scanner(System.in);
     public static void main(String args[])
     {
-        initDB();
+        //initDB();
         
         boolean run = true;
         while(run)
@@ -40,8 +40,10 @@ public class Main {
             System.out.println("Choisissez votre action\n");
             System.out.println("1) Creer un client\n");
             System.out.println("2) Connexion client\n");
-            System.out.println("3) Connexion gestionnaire\n");
-            System.out.println("4) Quitter appli\n");
+            System.out.println("3) Lister les restaurants\n");
+            System.out.println("4) Lister les clients\n");
+            System.out.println("5) Lister les produits d'un restaurant\n");
+            System.out.println("6) Quitter appli\n");
 
             int choix =  Integer.parseInt(sc.nextLine());
 
@@ -76,10 +78,35 @@ public class Main {
                     break;
                     
                 case 3:
+                    List<Restaurant> r = serviceT.listAllRestaurants();
+                    for(int j = 0; j < r.size(); j ++)
+                    {
+                        System.out.println(r.get(j).toString()+"\n");
+                        
+                    }
                     break;
                     
-                    
                 case 4:
+                    List<Client> c = serviceT.listAllClients();
+                    for(int j = 0; j < c.size(); j ++)
+                    {
+                        System.out.println(c.get(j).toString()+"\n");
+                    }
+                    
+                    break;
+                    
+                case 5:
+                    System.out.println("Entre l'id d'un resto\n");
+                    choix =  Integer.parseInt(sc.nextLine());
+                    List<Produit> p = serviceT.listAllProductsForARestaurant((long)choix);
+                    for(int j = 0; j < p.size(); j ++)
+                    {
+                        System.out.println(p.get(j).toString()+"\n");
+                        
+                    }
+                    break;           
+                    
+                case 6:
                     run = false;
                     break;
             }
@@ -89,9 +116,10 @@ public class Main {
     
     public static void initDB()
     {
+        /*
         //Creation des produits
         String plats [] = {"Viande","Poisson","Vegan"};
-        for(int i=0; i < plats.length ; i++)
+        for(int i=0; i < 1 ; i++)
         {
             Produit p = new Produit();
             p.setDenomination(plats[i]);
@@ -103,7 +131,7 @@ public class Main {
         
         //Creation restaurants
         String restos [] = {"Au bon dodu","Mac do","Vegan palace"};
-        for(int i=0; i < restos.length ; i++)
+        for(int i=0; i < 1 ; i++)
         {
             Restaurant r = new Restaurant();
             r.setAdresse(""+(i+1)+" avenue roger salengro");
@@ -119,7 +147,7 @@ public class Main {
         }
         
         //Creation clients
-        for(int i=0; i < 30 ; i++)
+        for(int i=0; i < 1 ; i++)
         {
             Client c = new Client();
             c.setNom("Jhon"+(i+1));
@@ -128,15 +156,16 @@ public class Main {
             c.setMail(""+(i+1)+"@gustatif.fr");
             serviceT.createClient(c);
         }
-        
+        */
         //Creation Livreur
         for(int i=0; i < 10 ; i++)
         {
             Livreur l = new Livreur();
             l.setNom("Will"+(i+1));
-            l.setCapacite((double) i+15);
+            l.setCapacite((double) i+1500000);
             l.setAdresse(""+(i+1)+"avenue jean france");
             l.setVitesseMoyenne((double) i+20);
+            l.setDisponible(true);
             serviceT.createLivreur(l);
         }
     }
