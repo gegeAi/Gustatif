@@ -8,10 +8,10 @@
     <class>com.b3130.gustatif.metier.modele.Produit</class>
     <class>com.b3130.gustatif.metier.modele.Restaurant</class>
     <properties>
-      <property name="javax.persistence.jdbc.url" value="jdbc:derby://localhost:1527/azerty"/>
-      <property name="javax.persistence.jdbc.password" value="azerty"/>
+      <property name="javax.persistence.jdbc.url" value="jdbc:derby://localhost:1527/GustatifB3130"/>
+      <property name="javax.persistence.jdbc.password" value="douduo!5702"/>
       <property name="javax.persistence.jdbc.driver" value="org.apache.derby.jdbc.ClientDriver"/>
-      <property name="javax.persistence.jdbc.user" value="stoko"/>
+      <property name="javax.persistence.jdbc.user" value="jliermann"/>
       <property name="javax.persistence.schema-generation.database.action" value="create"/>
     </properties>
   </persistence-unit>

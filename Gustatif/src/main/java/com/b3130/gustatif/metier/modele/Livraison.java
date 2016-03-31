@@ -5,7 +5,6 @@
  */
 package com.b3130.gustatif.metier.modele;
 
-import static com.b3130.gustatif.vue.Main.sc;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.LinkedList;

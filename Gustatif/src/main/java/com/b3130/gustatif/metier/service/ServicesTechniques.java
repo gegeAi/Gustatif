@@ -167,8 +167,6 @@ public class ServicesTechniques {
             JpaUtil.fermerEntityManager();
         }
         
-        lireChaine("appuyez sur une touche pour continuer");
-        
         JpaUtil.validerTransaction();
         JpaUtil.fermerEntityManager(); 
     }

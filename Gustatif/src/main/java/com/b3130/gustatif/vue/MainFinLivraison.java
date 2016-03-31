@@ -5,13 +5,10 @@
  */
 package com.b3130.gustatif.vue;
 
-import com.b3130.gustatif.metier.modele.Client;
 import com.b3130.gustatif.metier.modele.Livraison;
 import com.b3130.gustatif.metier.service.ServicesTechniques;
 import com.b3130.gustatif.metier.service.ServicesMetier;
-import static com.b3130.gustatif.vue.Main.requete;
 import static com.b3130.gustatif.vue.Main.sc;
-import static com.b3130.gustatif.vue.Main.serviceM;
 import java.util.List;
 import java.util.Objects;
 

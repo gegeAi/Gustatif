@@ -1,8 +1,8 @@
-Wed Mar 30 18:03:05 CEST 2016 : Apache Derby Serveur réseau - 10.8.3.2 - (1557835) démarré et prêt à accepter les connexions sur le port 1527
+Thu Mar 31 09:17:11 CEST 2016 : Apache Derby Serveur réseau - 10.8.3.2 - (1557835) démarré et prêt à accepter les connexions sur le port 1527
 ----------------------------------------------------------------
-Wed Mar 30 18:03:05 CEST 2016:
-Amorçage de Derby version The Apache Software Foundation - Apache Derby - 10.8.3.2 - (1557835) : instance a816c00e-0153-c843-928a-000006a39e0c 
-dans le répertoire de base de données C:\Users\jliermann\Gustatif\azerty  avec le chargeur de classe sun.misc.Launcher$AppClassLoader@2d4b1fda
+Thu Mar 31 09:17:59 CEST 2016:
+Amorçage de Derby version The Apache Software Foundation - Apache Derby - 10.8.3.2 - (1557835) : instance a816c00e-0153-cb88-7887-000006a39e0c 
+dans le répertoire de base de données C:\Users\jliermann\Gustatif\GustatifB3130  avec le chargeur de classe sun.misc.Launcher$AppClassLoader@1f183871
 
 java.vendor=Oracle Corporation
 java.runtime.version=1.7.0_71-b14
@@ -13,115 +13,26 @@ os.version=6.1
 derby.system.home=C:\Users\jliermann\Gustatif
 Chargeur de classe de la base de données démarré - derby.database.classpath=''
 ----------------------------------------------------------------
-Wed Mar 30 18:03:08 CEST 2016:
-Fermeture de l'instance a816c00e-0153-c843-928a-000006a39e0c sur le répertoire de base de données C:\Users\jliermann\Gustatif\azerty avec le chargeur de classe sun.misc.Launcher$AppClassLoader@2d4b1fda
-Wed Mar 30 18:03:08 CEST 2016 Thread[DRDAConnThread_4,5,main] (DATABASE = azerty), (DRDAID = {2}), Arrêt de la base de données 'azerty'.
-Wed Mar 30 18:03:21 CEST 2016 Thread[DRDAConnThread_3,5,main] Cleanup action starting
-java.sql.SQLException: Impossible de trouver la base de données 'GustatifB3130'.
-	at org.apache.derby.impl.jdbc.SQLExceptionFactory40.getSQLException(Unknown Source)
-	at org.apache.derby.impl.jdbc.Util.newEmbedSQLException(Unknown Source)
-	at org.apache.derby.impl.jdbc.Util.newEmbedSQLException(Unknown Source)
-	at org.apache.derby.impl.jdbc.Util.generateCsSQLException(Unknown Source)
-	at org.apache.derby.impl.jdbc.EmbedConnection.newSQLException(Unknown Source)
-	at org.apache.derby.impl.jdbc.EmbedConnection.handleDBNotFound(Unknown Source)
-	at org.apache.derby.impl.jdbc.EmbedConnection.<init>(Unknown Source)
-	at org.apache.derby.impl.jdbc.EmbedConnection30.<init>(Unknown Source)
-	at org.apache.derby.impl.jdbc.EmbedConnection40.<init>(Unknown Source)
-	at org.apache.derby.jdbc.Driver40.getNewEmbedConnection(Unknown Source)
-	at org.apache.derby.jdbc.InternalDriver.connect(Unknown Source)
-	at org.apache.derby.jdbc.EmbeddedDriver.connect(Unknown Source)
-	at org.apache.derby.impl.drda.Database.makeConnection(Unknown Source)
-	at org.apache.derby.impl.drda.DRDAConnThread.getConnFromDatabaseName(Unknown Source)
-	at org.apache.derby.impl.drda.DRDAConnThread.verifyUserIdPassword(Unknown Source)
-	at org.apache.derby.impl.drda.DRDAConnThread.parseSECCHK(Unknown Source)
-	at org.apache.derby.impl.drda.DRDAConnThread.parseDRDAConnection(Unknown Source)
-	at org.apache.derby.impl.drda.DRDAConnThread.processCommands(Unknown Source)
-	at org.apache.derby.impl.drda.DRDAConnThread.run(Unknown Source)
-Caused by: java.sql.SQLException: Impossible de trouver la base de données 'GustatifB3130'.
-	at org.apache.derby.impl.jdbc.SQLExceptionFactory.getSQLException(Unknown Source)
-	at org.apache.derby.impl.jdbc.SQLExceptionFactory40.wrapArgsForTransportAcrossDRDA(Unknown Source)
-	... 19 more
-============= begin nested exception, level (1) ===========
-java.sql.SQLException: Impossible de trouver la base de données 'GustatifB3130'.
-	at org.apache.derby.impl.jdbc.SQLExceptionFactory.getSQLException(Unknown Source)
-	at org.apache.derby.impl.jdbc.SQLExceptionFactory40.wrapArgsForTransportAcrossDRDA(Unknown Source)
-	at org.apache.derby.impl.jdbc.SQLExceptionFactory40.getSQLException(Unknown Source)
-	at org.apache.derby.impl.jdbc.Util.newEmbedSQLException(Unknown Source)
-	at org.apache.derby.impl.jdbc.Util.newEmbedSQLException(Unknown Source)
-	at org.apache.derby.impl.jdbc.Util.generateCsSQLException(Unknown Source)
-	at org.apache.derby.impl.jdbc.EmbedConnection.newSQLException(Unknown Source)
-	at org.apache.derby.impl.jdbc.EmbedConnection.handleDBNotFound(Unknown Source)
-	at org.apache.derby.impl.jdbc.EmbedConnection.<init>(Unknown Source)
-	at org.apache.derby.impl.jdbc.EmbedConnection30.<init>(Unknown Source)
-	at org.apache.derby.impl.jdbc.EmbedConnection40.<init>(Unknown Source)
-	at org.apache.derby.jdbc.Driver40.getNewEmbedConnection(Unknown Source)
-	at org.apache.derby.jdbc.InternalDriver.connect(Unknown Source)
-	at org.apache.derby.jdbc.EmbeddedDriver.connect(Unknown Source)
-	at org.apache.derby.impl.drda.Database.makeConnection(Unknown Source)
-	at org.apache.derby.impl.drda.DRDAConnThread.getConnFromDatabaseName(Unknown Source)
-	at org.apache.derby.impl.drda.DRDAConnThread.verifyUserIdPassword(Unknown Source)
-	at org.apache.derby.impl.drda.DRDAConnThread.parseSECCHK(Unknown Source)
-	at org.apache.derby.impl.drda.DRDAConnThread.parseDRDAConnection(Unknown Source)
-	at org.apache.derby.impl.drda.DRDAConnThread.processCommands(Unknown Source)
-	at org.apache.derby.impl.drda.DRDAConnThread.run(Unknown Source)
-============= end nested exception, level (1) ===========
-Cleanup action completed
-Wed Mar 30 18:03:21 CEST 2016 Thread[DRDAConnThread_3,5,main] (DATABASE = GustatifB3130), (DRDAID = {3}), Impossible de trouver la base de données 'GustatifB3130'.
-Wed Mar 30 18:03:21 CEST 2016 Thread[DRDAConnThread_4,5,main] Cleanup action starting
-java.sql.SQLException: Impossible de trouver la base de données 'GustatifB3130'.
-	at org.apache.derby.impl.jdbc.SQLExceptionFactory40.getSQLException(Unknown Source)
-	at org.apache.derby.impl.jdbc.Util.newEmbedSQLException(Unknown Source)
-	at org.apache.derby.impl.jdbc.Util.newEmbedSQLException(Unknown Source)
-	at org.apache.derby.impl.jdbc.Util.generateCsSQLException(Unknown Source)
-	at org.apache.derby.impl.jdbc.EmbedConnection.newSQLException(Unknown Source)
-	at org.apache.derby.impl.jdbc.EmbedConnection.handleDBNotFound(Unknown Source)
-	at org.apache.derby.impl.jdbc.EmbedConnection.<init>(Unknown Source)
-	at org.apache.derby.impl.jdbc.EmbedConnection30.<init>(Unknown Source)
-	at org.apache.derby.impl.jdbc.EmbedConnection40.<init>(Unknown Source)
-	at org.apache.derby.jdbc.Driver40.getNewEmbedConnection(Unknown Source)
-	at org.apache.derby.jdbc.InternalDriver.connect(Unknown Source)
-	at org.apache.derby.jdbc.EmbeddedDriver.connect(Unknown Source)
-	at org.apache.derby.impl.drda.Database.makeConnection(Unknown Source)
-	at org.apache.derby.impl.drda.DRDAConnThread.getConnFromDatabaseName(Unknown Source)
-	at org.apache.derby.impl.drda.DRDAConnThread.verifyUserIdPassword(Unknown Source)
-	at org.apache.derby.impl.drda.DRDAConnThread.parseSECCHK(Unknown Source)
-	at org.apache.derby.impl.drda.DRDAConnThread.parseDRDAConnection(Unknown Source)
-	at org.apache.derby.impl.drda.DRDAConnThread.processCommands(Unknown Source)
-	at org.apache.derby.impl.drda.DRDAConnThread.run(Unknown Source)
-Caused by: java.sql.SQLException: Impossible de trouver la base de données 'GustatifB3130'.
-	at org.apache.derby.impl.jdbc.SQLExceptionFactory.getSQLException(Unknown Source)
-	at org.apache.derby.impl.jdbc.SQLExceptionFactory40.wrapArgsForTransportAcrossDRDA(Unknown Source)
-	... 19 more
-============= begin nested exception, level (1) ===========
-java.sql.SQLException: Impossible de trouver la base de données 'GustatifB3130'.
-	at org.apache.derby.impl.jdbc.SQLExceptionFactory.getSQLException(Unknown Source)
-	at org.apache.derby.impl.jdbc.SQLExceptionFactory40.wrapArgsForTransportAcrossDRDA(Unknown Source)
-	at org.apache.derby.impl.jdbc.SQLExceptionFactory40.getSQLException(Unknown Source)
-	at org.apache.derby.impl.jdbc.Util.newEmbedSQLException(Unknown Source)
-	at org.apache.derby.impl.jdbc.Util.newEmbedSQLException(Unknown Source)
-	at org.apache.derby.impl.jdbc.Util.generateCsSQLException(Unknown Source)
-	at org.apache.derby.impl.jdbc.EmbedConnection.newSQLException(Unknown Source)
-	at org.apache.derby.impl.jdbc.EmbedConnection.handleDBNotFound(Unknown Source)
-	at org.apache.derby.impl.jdbc.EmbedConnection.<init>(Unknown Source)
-	at org.apache.derby.impl.jdbc.EmbedConnection30.<init>(Unknown Source)
-	at org.apache.derby.impl.jdbc.EmbedConnection40.<init>(Unknown Source)
-	at org.apache.derby.jdbc.Driver40.getNewEmbedConnection(Unknown Source)
-	at org.apache.derby.jdbc.InternalDriver.connect(Unknown Source)
-	at org.apache.derby.jdbc.EmbeddedDriver.connect(Unknown Source)
-	at org.apache.derby.impl.drda.Database.makeConnection(Unknown Source)
-	at org.apache.derby.impl.drda.DRDAConnThread.getConnFromDatabaseName(Unknown Source)
-	at org.apache.derby.impl.drda.DRDAConnThread.verifyUserIdPassword(Unknown Source)
-	at org.apache.derby.impl.drda.DRDAConnThread.parseSECCHK(Unknown Source)
-	at org.apache.derby.impl.drda.DRDAConnThread.parseDRDAConnection(Unknown Source)
-	at org.apache.derby.impl.drda.DRDAConnThread.processCommands(Unknown Source)
-	at org.apache.derby.impl.drda.DRDAConnThread.run(Unknown Source)
-============= end nested exception, level (1) ===========
-Cleanup action completed
-Wed Mar 30 18:03:21 CEST 2016 Thread[DRDAConnThread_4,5,main] (DATABASE = GustatifB3130), (DRDAID = {4}), Impossible de trouver la base de données 'GustatifB3130'.
+Thu Mar 31 09:18:03 CEST 2016:
+Fermeture de l'instance a816c00e-0153-cb88-7887-000006a39e0c sur le répertoire de base de données C:\Users\jliermann\Gustatif\GustatifB3130 avec le chargeur de classe sun.misc.Launcher$AppClassLoader@1f183871
+Thu Mar 31 09:18:03 CEST 2016 Thread[DRDAConnThread_4,5,main] (DATABASE = GustatifB3130), (DRDAID = {2}), Arrêt de la base de données 'GustatifB3130'.
 ----------------------------------------------------------------
-Wed Mar 30 18:03:49 CEST 2016:
-Amorçage de Derby version The Apache Software Foundation - Apache Derby - 10.8.3.2 - (1557835) : instance 6c44409f-0153-c843-928a-000006a39e0c 
-dans le répertoire de base de données C:\Users\jliermann\Gustatif\azerty  avec le chargeur de classe sun.misc.Launcher$AppClassLoader@2d4b1fda
+Thu Mar 31 09:18:08 CEST 2016:
+Amorçage de Derby version The Apache Software Foundation - Apache Derby - 10.8.3.2 - (1557835) : instance 6c44409f-0153-cb88-7887-000006a39e0c 
+dans le répertoire de base de données C:\Users\jliermann\Gustatif\GustatifB3130  avec le chargeur de classe sun.misc.Launcher$AppClassLoader@1f183871
+
+java.vendor=Oracle Corporation
+java.runtime.version=1.7.0_71-b14
+user.dir=C:\Program Files\Java\jdk1.7.0_71\db
+os.name=Windows 7
+os.arch=amd64
+os.version=6.1
+derby.system.home=C:\Users\jliermann\Gustatif
+Chargeur de classe de la base de données démarré - derby.database.classpath=''
+----------------------------------------------------------------
+Thu Mar 31 09:18:59 CEST 2016:
+Amorçage de Derby version The Apache Software Foundation - Apache Derby - 10.8.3.2 - (1557835) : instance 109f00b9-0153-cb88-7887-000006a39e0c 
+dans le répertoire de base de données C:\Users\jliermann\Gustatif\azerty  avec le chargeur de classe sun.misc.Launcher$AppClassLoader@1f183871
 
 java.vendor=Oracle Corporation
 java.runtime.version=1.7.0_71-b14

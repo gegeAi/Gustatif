@@ -18,6 +18,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
+import static util.Saisie.lireChaine;
 
 /**
  *
@@ -59,7 +60,13 @@ public class ServicesMetier {
         return clientFound;  
     }
     
-    public boolean creerCommande(Client c, List<Produit> p, List<Integer> qte, Restaurant r)
+    public String creerCommande(Client c, List<Produit> p, List<Integer> qte, Restaurant r)
+    {
+        return creerCommande(c, p, qte, r, false);
+        
+    }
+    
+    public String creerCommande(Client c, List<Produit> p, List<Integer> qte, Restaurant r, boolean pause)
     {
         try {
             Livraison l = new Livraison(new Date(), c, r);
@@ -72,15 +79,16 @@ public class ServicesMetier {
             }
             affecteLivreur(l);
             String mail = mailLivreur(l);
+            if(pause)
+                 lireChaine("appuyez sur une touche pour continuer");
             st.createLivraisons(l);
-            System.out.println(mail);
+            return mail;
         } catch (Throwable ex) {
             System.out.println(ex);
   
-            return false;
+            return null;
         }
         
-        return true;
     }
     
     public boolean affecteLivreur(Livraison l)
@@ -101,9 +109,7 @@ public class ServicesMetier {
                 else
                     candidat = GeoTest.getFlightDistanceInKm(GeoTest.getLatLng(livreur.getAdresse()), GeoTest.getLatLng(l.getResto().getAdresse())) / livreur.getVitesseMoyenne();
                 
-                System.out.println("Trajet court : " + trajetCourt + " candidat : " + candidat);
                 if (trajetCourt > candidat || trajetCourt == -1d) { 
-                    System.out.println("Trajet court : " + trajetCourt + " candidat : " + candidat);
                     renvoi = livreur;
                     trajetCourt=candidat;
                 } 
@@ -137,7 +143,6 @@ public class ServicesMetier {
     public String mailLivreur(Livraison l)
     // Valide la commande et renvoie le contenu d'un mail a envoyer au livreur
     {
-        System.out.println(l);
         String renvoi = "Bonjour " + l.getLivreur().getNom() + ",\nMerci d'effectuer cette livraison dès maintenant, tout en respectant le code de la route;-)\n\t Le Chef";
         renvoi += "\n\nDétails de la Livraison \n\tDate/heure : ";
         renvoi += l.getInstantPassageCmd().toString();
