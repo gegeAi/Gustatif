@@ -11,6 +11,7 @@ import com.b3130.gustatif.metier.modele.Restaurant;
 import com.b3130.gustatif.metier.modele.Livreur;
 import com.b3130.gustatif.metier.service.ServicesTechniques;
 import com.b3130.gustatif.metier.service.ServicesMetier;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -33,11 +34,12 @@ public class Main {
             System.out.println("*****Bienvenue à GustatIF*****\n");
             System.out.println("Choisissez votre action\n");
             System.out.println("1) Creer un client\n");
-            System.out.println("2) Connexion client\n");
+            System.out.println("2) Creer commande client\n");
             System.out.println("3) Lister les restaurants\n");
             System.out.println("4) Lister les clients\n");
             System.out.println("5) Lister les produits d'un restaurant\n");
-            System.out.println("6) Quitter appli\n");
+            System.out.println("6) Valider commande\n");
+            System.out.println("7) Quitter appli\n");
 
             int choix =  Integer.parseInt(sc.nextLine());
 
@@ -69,6 +71,13 @@ public class Main {
                     {
                         System.out.println(
                                 ""+connecte.getMail()+" est connecte\n");
+                        System.out.println("Entrez id resto\n");
+                        choix =  Integer.parseInt(sc.nextLine());
+                        List<Produit> pr = serviceT.listAllProductsForARestaurant((long) choix);
+                        List<Integer> qte = new LinkedList<>();
+                        for(Produit p : pr)
+                             qte.add(1);
+                        System.out.println(serviceM.creerCommande(connecte, pr ,qte, serviceT.findRestaurantById((long) choix)));
                         
                     }
                     break;
@@ -101,9 +110,14 @@ public class Main {
                         System.out.println(p.get(j).toString()+"\n");
                         
                     }
-                    break;           
+                    break; 
+                    
                     
                 case 6:
+                    
+                    break;      
+                    
+                case 7:
                     run = false;
                     break;
             }

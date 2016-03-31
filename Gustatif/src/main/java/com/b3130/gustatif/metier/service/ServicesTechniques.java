@@ -288,5 +288,20 @@ public class ServicesTechniques {
         JpaUtil.fermerEntityManager();
         return allProducts;
     }
+
+    public Restaurant findRestaurantById(Long id)
+    {
+        Restaurant restaurantFound = null;
+        JpaUtil.creerEntityManager();
+        JpaUtil.ouvrirTransaction();
+        try {
+            restaurantFound = daoRestaurant.findById(id);
+        } catch (Throwable ex) {
+            JpaUtil.fermerEntityManager();
+        }
+        JpaUtil.validerTransaction();
+        JpaUtil.fermerEntityManager();
+        return restaurantFound; 
+    }
             
 }
