@@ -152,7 +152,15 @@ public class Livraison implements Serializable {
 
     @Override
     public String toString() {
-        return "Livraison{" + "id=" + id + ", heureLivraison=" + heureLivraison + ", dureeEstimee=" + dureeEstimee + ", instantPassageCmd=" + instantPassageCmd + ", commande=" + commande + ", client=" + client + ", resto=" + resto + ", livreur=" + livreur + '}';
+        return "Livraison{" 
+                + "id=" + id 
+                + ", heureLivraison=" + heureLivraison 
+                + ", dureeEstimee=" + dureeEstimee 
+                + ", instantPassageCmd=" + instantPassageCmd 
+                + ", commande=" + commande 
+                + ", client=" + client 
+                + ", resto=" + resto 
+                + ", livreur=" + livreur + '}';
     } 
         
 }

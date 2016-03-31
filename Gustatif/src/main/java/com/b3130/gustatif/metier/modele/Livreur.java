@@ -43,7 +43,10 @@ public class Livreur implements Serializable {
         disponible = true;
     }
     
-    public Livreur(String nom, String adresse, Double capacite, Double vitesseMoyenne) {
+    public Livreur(String nom, 
+            String adresse, 
+            Double capacite, 
+            Double vitesseMoyenne) {
         this(nom, adresse, capacite);
         this.vitesseMoyenne = vitesseMoyenne;
     }
@@ -109,7 +112,15 @@ public class Livreur implements Serializable {
 
     @Override
     public String toString() {
-        return "Livreur{" + "id=" + id + ", nom=" + nom + ", adresse=" + adresse + ", longitude=" + longitude + ", latitude=" + latitude + ", capacite=" + capacite + ", vitesseMoyenne=" + vitesseMoyenne + ", disponible=" + disponible + '}';
+        return "Livreur{" 
+                + "id=" + id 
+                + ", nom=" + nom 
+                + ", adresse=" + adresse 
+                + ", longitude=" + longitude 
+                + ", latitude=" + latitude 
+                + ", capacite=" + capacite 
+                + ", vitesseMoyenne=" + vitesseMoyenne 
+                + ", disponible=" + disponible + '}';
     }
        
        

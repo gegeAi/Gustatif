@@ -1,7 +1,6 @@
 package com.b3130.gustatif.dao;
 
 
-import com.b3130.gustatif.metier.modele.Produit;
 import com.b3130.gustatif.metier.modele.Restaurant;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -47,7 +46,8 @@ public class RestaurantDao {
         EntityManager em = JpaUtil.obtenirEntityManager();
         Restaurant restaurant = null;
         try {
-            Query q = em.createQuery("SELECT r FROM Restaurant r WHERE r.denomination = :name");
+            Query q = em.createQuery(
+                    "SELECT r FROM Restaurant r WHERE r.denomination = :name");
             q.setParameter("name", name);
             restaurant = (Restaurant) q.getSingleResult();
         }
@@ -61,7 +61,8 @@ public class RestaurantDao {
         EntityManager em = JpaUtil.obtenirEntityManager();
         List<Restaurant> restaurants = null;
         try {
-            Query q = em.createQuery("SELECT r FROM Restaurant r order by r.denomination");
+            Query q = em.createQuery(
+                    "SELECT r FROM Restaurant r order by r.denomination");
             restaurants = (List<Restaurant>) q.getResultList();
         }
         catch(Exception e) {

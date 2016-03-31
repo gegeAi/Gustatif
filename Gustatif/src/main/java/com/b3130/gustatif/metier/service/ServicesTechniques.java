@@ -18,7 +18,6 @@ import com.b3130.gustatif.metier.modele.Produit;
 import com.b3130.gustatif.metier.modele.Restaurant;
 import java.util.LinkedList;
 import java.util.List;
-import static util.Saisie.lireChaine;
 
 /**
  *

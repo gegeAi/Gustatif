@@ -34,11 +34,15 @@ public class ServicesMetier {
     {
         if(!st.createClient(c))
         {
-        return "Bonjour " + c.getPrenom() + ",\nVotre inscription au service GUSTAT’IF a malencontreusement échoué... Merci de recommencer ultérieurement.";
+        return "Bonjour " + c.getPrenom() + ",\nVotre inscription au service "
+                + "GUSTAT’IF a malencontreusement échoué... "
+                + "Merci de recommencer ultérieurement.";
         }
         else
         {
-        return "Bonjour " + c.getPrenom() + ",\nNous vous confirmons votre inscription au service GUSTAT’IF. Votre numéro de client est : " + c.getId() + ".";
+        return "Bonjour " + c.getPrenom() + ",\nNous vous confirmons votre "
+                + "inscription au service GUSTAT’IF. "
+                + "Votre numéro de client est : " + c.getId() + ".";
         }
     }
     
@@ -60,13 +64,17 @@ public class ServicesMetier {
         return clientFound;  
     }
     
-    public String creerCommande(Client c, List<Produit> p, List<Integer> qte, Restaurant r)
+    public String creerCommande(Client c, List<Produit> p, 
+            List<Integer> qte, 
+            Restaurant r)
     {
         return creerCommande(c, p, qte, r, false);
         
     }
     
-    public String creerCommande(Client c, List<Produit> p, List<Integer> qte, Restaurant r, boolean pause)
+    public String creerCommande(Client c, List<Produit> p, 
+            List<Integer> qte, 
+            Restaurant r, boolean pause)
     {
         try {
             Livraison l = new Livraison(new Date(), c, r);
@@ -92,7 +100,8 @@ public class ServicesMetier {
     }
     
     public boolean affecteLivreur(Livraison l)
-    // Choisi un livreur pour une livraison, et bloque son etat comme indisponible 
+    // Choisi un livreur pour une livraison, et bloque son etat comme 
+    //indisponible 
     // jusqu'à livraison de la commande ou annulation de celle-ci
     {
         Livreur renvoi = null;
@@ -102,12 +111,20 @@ public class ServicesMetier {
 
         for (Livreur livreur : livreurs) {
             
-            if (livreur.isDisponible() && l.getTotalPoids() < livreur.getCapacite()) {
+            if (livreur.isDisponible() && 
+                    l.getTotalPoids() < livreur.getCapacite()) {
                 Double candidat;
                 if(livreur.getVitesseMoyenne() == null)
-                    candidat = GeoTest.getTripDurationByBicycleInMinute(GeoTest.getLatLng(livreur.getAdresse()), GeoTest.getLatLng(l.getResto().getAdresse()));
+                    candidat = GeoTest.getTripDurationByBicycleInMinute(
+                            GeoTest.getLatLng(livreur.getAdresse()), 
+                            GeoTest.getLatLng(l.getResto().getAdresse()));
                 else
-                    candidat = GeoTest.getFlightDistanceInKm(GeoTest.getLatLng(livreur.getAdresse()), GeoTest.getLatLng(l.getResto().getAdresse())) / livreur.getVitesseMoyenne();
+                {
+                    candidat = GeoTest.getFlightDistanceInKm(
+                            GeoTest.getLatLng(livreur.getAdresse()), 
+                            GeoTest.getLatLng(l.getResto().getAdresse()));
+                    candidat /= livreur.getVitesseMoyenne();
+                }
                 
                 if (trajetCourt > candidat || trajetCourt == -1d) { 
                     renvoi = livreur;
@@ -143,7 +160,9 @@ public class ServicesMetier {
     public String mailLivreur(Livraison l)
     // Valide la commande et renvoie le contenu d'un mail a envoyer au livreur
     {
-        String renvoi = "Bonjour " + l.getLivreur().getNom() + ",\nMerci d'effectuer cette livraison dès maintenant, tout en respectant le code de la route;-)\n\t Le Chef";
+        String renvoi = "Bonjour " + l.getLivreur().getNom() + ",\nMerci "
+           + "d'effectuer cette livraison dès maintenant, tout en respectant"
+           + " le code de la route;-)\n\t Le Chef";
         renvoi += "\n\nDétails de la Livraison \n\tDate/heure : ";
         renvoi += l.getInstantPassageCmd().toString();
         renvoi += "\n\tLivreur : ";
@@ -204,6 +223,21 @@ public class ServicesMetier {
         for (Livraison livraisonsActuelle : livraisonsActuelles) 
         {
             if(livraisonsActuelle.getHeureLivraison() == null)
+            {
+                renvoi.add(livraisonsActuelle);
+            }
+        }
+        return renvoi;
+    }
+    
+    public List<Livraison> trouveCommandesTerminees()
+    // renvoie une listes des commandes non abouties (en cours)
+    {
+        List<Livraison> livraisonsActuelles = st.listAllDelivery();
+        List<Livraison> renvoi = new LinkedList<>();
+        for (Livraison livraisonsActuelle : livraisonsActuelles) 
+        {
+            if(livraisonsActuelle.getHeureLivraison() != null)
             {
                 renvoi.add(livraisonsActuelle);
             }

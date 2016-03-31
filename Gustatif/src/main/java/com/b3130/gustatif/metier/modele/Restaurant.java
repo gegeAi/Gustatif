@@ -1,6 +1,5 @@
 package com.b3130.gustatif.metier.modele;
 
-import com.b3130.gustatif.metier.service.ServicesTechniques;
 import com.b3130.gustatif.util.GeoTest;
 import com.google.maps.model.LatLng;
 import java.io.Serializable;
@@ -93,7 +92,14 @@ public class Restaurant implements Serializable {
 
     @Override
     public String toString() {
-        return "Restaurant{" + "id=" + id + ", denomination=" + denomination + ", description=" + description + ", adresse=" + adresse + ", longitudeAdresse=" + longitude + ", latitudeAdresse=" + latitude + ", produits=" + produits + '}';
+        return "Restaurant{" 
+                + "id=" + id 
+                + ", denomination=" + denomination 
+                + ", description=" + description 
+                + ", adresse=" + adresse 
+                + ", longitudeAdresse=" + longitude 
+                + ", latitudeAdresse=" + latitude 
+                + ", produits=" + produits + '}';
     }
     
     

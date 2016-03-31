@@ -6,17 +6,11 @@
 package com.b3130.gustatif.vue;
 
 import com.b3130.gustatif.metier.modele.Client;
-import com.b3130.gustatif.metier.modele.Livraison;
 import com.b3130.gustatif.metier.modele.Produit;
 import com.b3130.gustatif.metier.modele.Restaurant;
 import com.b3130.gustatif.metier.modele.Livreur;
 import com.b3130.gustatif.metier.service.ServicesTechniques;
 import com.b3130.gustatif.metier.service.ServicesMetier;
-import com.b3130.gustatif.dao.LivraisonDao;
-import com.b3130.gustatif.dao.LivreurDao;
-import com.b3130.gustatif.dao.ProduitDao;
-import com.b3130.gustatif.dao.RestaurantDao;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -65,14 +59,16 @@ public class Main {
                     break;
                     
                 case 2:
-                    Client connecte = serviceM.connexionClient(requete("Entrez votre adresse mail"));
+                    Client connecte = serviceM.connexionClient(
+                            requete("Entrez votre adresse mail"));
                     if(connecte == null)
                     {
                         System.out.println("Erreur lors de la connexion\n");
                     }
                     else
                     {
-                        System.out.println(""+connecte.getMail()+" est connecte\n");
+                        System.out.println(
+                                ""+connecte.getMail()+" est connecte\n");
                         
                     }
                     break;
@@ -98,7 +94,8 @@ public class Main {
                 case 5:
                     System.out.println("Entre l'id d'un resto\n");
                     choix =  Integer.parseInt(sc.nextLine());
-                    List<Produit> p = serviceT.listAllProductsForARestaurant((long)choix);
+                    List<Produit> p = 
+                            serviceT.listAllProductsForARestaurant((long)choix);
                     for(int j = 0; j < p.size(); j ++)
                     {
                         System.out.println(p.get(j).toString()+"\n");

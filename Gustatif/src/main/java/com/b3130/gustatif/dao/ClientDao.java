@@ -46,7 +46,8 @@ public class ClientDao {
         EntityManager em = JpaUtil.obtenirEntityManager();
         Client connect = null;
         try {
-            Query q = em.createQuery("SELECT c FROM Client c WHERE c.mail = :adMail");
+            Query q = em.createQuery(
+                    "SELECT c FROM Client c WHERE c.mail = :adMail");
             q.setParameter("adMail", adMail);
             connect = (Client) q.getSingleResult();
         }

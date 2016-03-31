@@ -18,9 +18,10 @@ import javax.persistence.RollbackException;
  */
 public class JpaUtil {
 
-  // *************************************************************************************
-    // * TODO: IMPORTANT -- Adapter le nom de l'Unité de Persistance (cf. persistence.xml) *
-    // *************************************************************************************
+// ****************************************************************************
+// * TODO: IMPORTANT 
+//-- Adapter le nom de l'Unité de Persistance (cf. persistence.xml) *
+// ****************************************************************************
     /**
      * Nom de l'unité de persistance utilisée par la Factory de Entity Manager.
      * <br/><strong>Vérifier le nom de l'unité de persistance
@@ -33,13 +34,15 @@ public class JpaUtil {
      * l'attribut statique PERSISTENCE_UNIT_NAME
      * (cf.&nbsp;persistence.xml)</strong>
      */
-    private static EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
+    private static EntityManagerFactory entityManagerFactory = 
+            Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
     /**
      * Gère les instances courantes de Entity Manager liées aux Threads.
      * L'utilisation de ThreadLocal garantie une unique instance courante par
      * Thread.
      */
-    private static final ThreadLocal<EntityManager> threadLocalEntityManager = new ThreadLocal<EntityManager>() {
+    private static final ThreadLocal<EntityManager> threadLocalEntityManager = 
+            new ThreadLocal<EntityManager>() {
 
         @Override
         protected EntityManager initialValue() {
@@ -66,8 +69,8 @@ public class JpaUtil {
      * <br/><strong>À utiliser uniquement au niveau Service.</strong>
      */
     public static void creerEntityManager() {
-        log("création du contexte de persistance");
-        threadLocalEntityManager.set(entityManagerFactory.createEntityManager());
+      log("création du contexte de persistance");
+      threadLocalEntityManager.set(entityManagerFactory.createEntityManager());
     }
 
     /**
@@ -91,7 +94,7 @@ public class JpaUtil {
             EntityManager em = threadLocalEntityManager.get();
             em.getTransaction().begin();
         } catch (Exception ex) {
-            Logger.getLogger(JpaUtil.class.getName()).log(Level.SEVERE, null, ex);
+          Logger.getLogger(JpaUtil.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -107,7 +110,7 @@ public class JpaUtil {
             EntityManager em = threadLocalEntityManager.get();
             em.getTransaction().commit();
         } catch (Exception ex) {
-            Logger.getLogger(JpaUtil.class.getName()).log(Level.SEVERE, null, ex);
+          Logger.getLogger(JpaUtil.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -128,7 +131,7 @@ public class JpaUtil {
             }
 
         } catch (Exception ex) {
-            Logger.getLogger(JpaUtil.class.getName()).log(Level.SEVERE, null, ex);
+          Logger.getLogger(JpaUtil.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

@@ -20,7 +20,10 @@ public class Produit implements Serializable {
     public Produit() {
     }
 
-    public Produit(String denomination, String description, Float prix, Float poids) {
+    public Produit(String denomination, 
+            String description, 
+            Float prix, 
+            Float poids) {
         this.denomination = denomination;
         this.description = description;
         this.prix = prix;
@@ -65,7 +68,12 @@ public class Produit implements Serializable {
 
     @Override
     public String toString() {
-        return "Produit{" + "id=" + id + ", denomination=" + denomination + ", description=" + description + ", prix=" + prix + ", poids=" + poids + '}';
+        return "Produit{" 
+                + "id=" + id 
+                + ", denomination=" + denomination 
+                + ", description=" + description 
+                + ", prix=" + prix 
+                + ", poids=" + poids + '}';
     }
    
     
